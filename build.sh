@@ -39,7 +39,7 @@ buildAssets () {
 
 buildBinary () {
   cd $REPO
-  go build -a -o cloudreve -ldflags " -X 'github.com/HFO4/cloudreve/pkg/conf.BackendVersion=$VERSION' -X 'github.com/HFO4/cloudreve/pkg/conf.LastCommit=$COMMIT_SHA'"
+  go build -a -o cloudreve -ldflags " -s -w -linkmode 'external' -extldflags '-static' -X 'github.com/HFO4/cloudreve/pkg/conf.BackendVersion=$VERSION' -X 'github.com/HFO4/cloudreve/pkg/conf.LastCommit=$COMMIT_SHA'"
 }
 
 _build() {
@@ -56,7 +56,7 @@ _build() {
     export CGO_ENABLED=1
 
     out="release/cloudreve_${VERSION}_${os}_${arch}"
-    go build -a -o "${out}" -ldflags " -X 'github.com/HFO4/cloudreve/pkg/conf.BackendVersion=$VERSION' -X 'github.com/HFO4/cloudreve/pkg/conf.LastCommit=$COMMIT_SHA'"
+    go build -a -o "${out}" -ldflags " -s -w -linkmode 'external' -extldflags '-static' -X 'github.com/HFO4/cloudreve/pkg/conf.BackendVersion=$VERSION' -X 'github.com/HFO4/cloudreve/pkg/conf.LastCommit=$COMMIT_SHA'"
 
     if [ "$os" = "windows" ]; then
       mv $out release/cloudreve.exe
@@ -72,7 +72,7 @@ _build() {
 release(){
   cd $REPO
   ## List of architectures and OS to test coss compilation.
-  SUPPORTED_OSARCH="linux/amd64/gcc linux/arm/arm-linux-gnueabihf-gcc windows/amd64/x86_64-w64-mingw32-gcc linux/arm64/aarch64-linux-gnu-gcc"
+  SUPPORTED_OSARCH="linux/amd64/gcc linux/arm64/aarch64-linux-gnu-gcc"
 
   echo "Release builds for OS/Arch/CC: ${SUPPORTED_OSARCH}"
   for each_osarch in ${SUPPORTED_OSARCH}; do
