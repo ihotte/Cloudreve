@@ -82,7 +82,7 @@ var cfg *ini.File
 
 const defaultConf = `[System]
 Mode = master
-Listen = :5212
+Listen = :8052
 SessionSecret = {SessionSecret}
 HashIDSalt = {HashIDSalt}
 `

@@ -20,7 +20,7 @@ var DatabaseConfig = &database{
 var SystemConfig = &system{
 	Debug:  false,
 	Mode:   "master",
-	Listen: ":5212",
+	Listen: ":8052",
 }
 
 // CaptchaConfig 验证码配置
