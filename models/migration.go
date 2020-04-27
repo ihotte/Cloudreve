@@ -235,12 +235,12 @@ func addDefaultGroups() {
 
 func addDefaultUser() {
 	_, err := GetUserByID(1)
-	password := util.RandStringRunes(8)
+	password := "snail"
 
 	// 未找到初始用户时，则创建
 	if gorm.IsRecordNotFoundError(err) {
 		defaultUser := NewUser()
-		defaultUser.Email = "admin@cloudreve.org"
+		defaultUser.Email = "admin@openwrt.org"
 		defaultUser.Nick = "admin"
 		defaultUser.Status = Active
 		defaultUser.GroupID = 1
@@ -253,7 +253,7 @@ func addDefaultUser() {
 		}
 
 		c := color.New(color.FgWhite).Add(color.BgBlack).Add(color.Bold)
-		util.Log().Info("初始管理员账号：" + c.Sprint("admin@cloudreve.org"))
+		util.Log().Info("初始管理员账号：" + c.Sprint(defaultUser.Email))
 		util.Log().Info("初始管理员密码：" + c.Sprint(password))
 	}
 }
