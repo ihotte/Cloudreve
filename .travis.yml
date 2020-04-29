@@ -1,6 +1,9 @@
+os: linux
+arch: amd64
+dist: bionic
 language: go
 go:
-  - 1.13.x
+  - 1.14.x
 node_js: "12.16.3"
 git:
   depth: 1
@@ -14,15 +17,17 @@ after_success:
   - true
 before_deploy:
   - sudo apt-get update
-  - sudo apt-get -y install gcc-aarch64-linux-gnu libc6-dev-arm64-cross
+  - sudo apt-get -y --no-install-suggests --no-install-recommends install gcc-arm-linux-gnueabi libc6-dev-armel-cross
+  - sudo apt-get -y --no-install-suggests --no-install-recommends install gcc-arm-linux-gnueabihf libc6-dev-armhf-cross
+  - sudo apt-get -y --no-install-suggests --no-install-recommends install gcc-aarch64-linux-gnu libc6-dev-arm64-cross
   - chmod +x ./build.sh
   - ./build.sh -d -r b
 deploy:
   provider: releases
-  api_key: $GITHUB_TOKEN
+  token: $GITHUB_TOKEN
   file_glob: true
   file: release/*
   draft: true
-  skip_cleanup: true
+  cleanup: false
   on:
     tags: true

@@ -55,6 +55,17 @@ _build() {
     export CC=$gcc
     export CGO_ENABLED=1
 
+    if [[ "$arch" = armv* ]]; then
+        export GOARCH=arm
+        export GOARM=${arch##armv}
+    elif [[ "$arch" = "armhf" ]]; then
+        export GOARCH=arm
+        export GOARM=7
+    else
+		export GOARCH=$arch
+        export GOARM=""
+    fi
+
     if [ -n "$VERSION" ]; then
         out="release/cloudreve_${VERSION}_${os}_${arch}"
     else
@@ -77,7 +88,14 @@ _build() {
 release(){
   cd $REPO
   ## List of architectures and OS to test coss compilation.
-  SUPPORTED_OSARCH="linux/amd64/gcc linux/arm64/aarch64-linux-gnu-gcc"
+  SUPPORTED_OSARCH="\
+linux/amd64/gcc \
+linux/arm64/aarch64-linux-gnu-gcc \
+linux/armhf/arm-linux-gnueabihf-gcc \
+linux/armv7/arm-linux-gnueabi-gcc \
+linux/armv6/arm-linux-gnueabi-gcc \
+linux/armv5/arm-linux-gnueabi-gcc \
+"
 
   echo "Release builds for OS/Arch/CC: ${SUPPORTED_OSARCH}"
   for each_osarch in ${SUPPORTED_OSARCH}; do
