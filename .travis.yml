@@ -28,6 +28,6 @@ deploy:
   file_glob: true
   file: release/*
   draft: true
-  cleanup: false
+  skip_cleanup: true
   on:
     tags: true
