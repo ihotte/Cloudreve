@@ -18,11 +18,11 @@ func InitApplication() {
 / /___| | (_) | |_| | (_| | | |  __/\ V /  __/
 \____/|_|\___/ \__,_|\__,_|_|  \___| \_/ \___|
 
-   V` + conf.BackendVersion + `  Commit #` + conf.LastCommit + `  Pro=` + conf.IsPro + `
+   v` + conf.BackendVersion + `  Commit #` + conf.LastCommit + `  For Openwrt` + `
 ================================================
 
 `)
-	go CheckUpdate()
+	// go CheckUpdate()
 }
 
 type GitHubRelease struct {
