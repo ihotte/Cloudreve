@@ -18,7 +18,7 @@ func InitApplication() {
 / /___| | (_) | |_| | (_| | | |  __/\ V /  __/
 \____/|_|\___/ \__,_|\__,_|_|  \___| \_/ \___|
 
-   v` + conf.BackendVersion + `  Commit #` + conf.LastCommit + `  For Openwrt` + `
+   v` + conf.BackendVersion + `  Commit #` + conf.LastCommit + `  for Openwrt` + `
 ================================================
 
 `)
