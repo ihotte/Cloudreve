@@ -131,3 +131,4 @@ fi
 if [ "$RELEASE" = "true" ]; then
   release
 fi
+
