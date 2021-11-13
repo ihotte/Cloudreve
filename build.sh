@@ -53,7 +53,7 @@ _build() {
     export GOOS=$os
     export GOARCH=$arch
     export CC=$gcc
-    export CGO_ENABLED=1
+    export CGO_ENABLED=0
 
     if [ -n "$VERSION" ]; then
         out="release/cloudreve_${VERSION}_${os}_${arch}"
